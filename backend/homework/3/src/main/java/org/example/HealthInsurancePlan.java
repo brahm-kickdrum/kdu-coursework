@@ -1,18 +1,18 @@
 package org.example;
 
-public abstract class healthInsurancePlan {
-    private insuranceBrand offeredBy;
+public abstract class HealthInsurancePlan {
+    private InsuranceBrand offeredBy;
     private double coverage;
-    public healthInsurancePlan(){}
-    public healthInsurancePlan(insuranceBrand offeredBy, double coverage){
+    public HealthInsurancePlan(){}
+    public HealthInsurancePlan(InsuranceBrand offeredBy, double coverage){
         this.offeredBy = offeredBy;
         this.coverage = coverage;
     }
-    public insuranceBrand getOfferedBy() {
+    public InsuranceBrand getOfferedBy() {
         return offeredBy;
     }
 
-    public void setOfferedBy(insuranceBrand offeredBy) {
+    public void setOfferedBy(InsuranceBrand offeredBy) {
         this.offeredBy = offeredBy;
     }
 

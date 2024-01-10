@@ -1,7 +1,7 @@
 package org.example;
 
-public class platinumPlan extends healthInsurancePlan {
-    public platinumPlan(){
+public class PlatinumPlan extends HealthInsurancePlan {
+    public PlatinumPlan(){
         setCoverage(0.9);
     }
 

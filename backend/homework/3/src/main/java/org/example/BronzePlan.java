@@ -1,7 +1,7 @@
 package org.example;
 
-public class bronzePlan extends healthInsurancePlan {
-    public bronzePlan(){
+public class BronzePlan extends HealthInsurancePlan {
+    public BronzePlan(){
         setCoverage(0.6);
     }
     public double computeMonthlyPremium(double salary, int age, boolean smoking){

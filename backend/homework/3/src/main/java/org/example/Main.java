@@ -1,19 +1,19 @@
 package org.example;
 
 public class Main {
-    private static logger log = new logger();
+    private static LoggerFile log = new LoggerFile();
     public static void main(String[] args) {
-        healthInsurancePlan insurancePlan = new platinumPlan();
+        HealthInsurancePlan insurancePlan = new PlatinumPlan();
 
-        patient patientA = new patient();
+        Patient patientA = new Patient();
         patientA.setInsurancePlan(insurancePlan);
 
-        double[] payments = billing.computePaymentAmount(patientA, 1000.0);
+        double[] payments = Billing.computePaymentAmount(patientA, 1000.0);
         log.logInfo(String.valueOf(payments[0]));
         log.logInfo(String.valueOf(payments[1]));
 
-        user staff = new user();
-        insuranceBrand insuranceBrand = new blueCrossBlueShield();
+        User staff = new User();
+        InsuranceBrand insuranceBrand = new BlueCrossBlueShield();
 
         insurancePlan.setOfferedBy(insuranceBrand);
         staff.setInsurancePlan(insurancePlan);

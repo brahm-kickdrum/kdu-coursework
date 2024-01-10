@@ -1,7 +1,7 @@
 package org.example;
 
 
-public class user {
+public class User {
 
     private long id;
     private String firstName;
@@ -9,21 +9,10 @@ public class user {
     private String gender;
     private String email;
     private boolean insured;
-    private healthInsurancePlan insurancePlan = null;
+    private HealthInsurancePlan insurancePlan = null;
     private int age;
     private boolean smoking;
-    public user(){}
-    public user(long id, String firstName, String lastName, String gender, String email, boolean insured, healthInsurancePlan insurancePlan, int age, boolean smoking) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.email = email;
-        this.insured = insured;
-        this.insurancePlan = insurancePlan;
-        this.age = age;
-        this.smoking = smoking;
-    }
+    public User(){}
     public long getId() {
         return id;
     }
@@ -60,10 +49,10 @@ public class user {
     public void setInsured(boolean insured) {
         this.insured = insured;
     }
-    public healthInsurancePlan getInsurancePlan(){
+    public HealthInsurancePlan getInsurancePlan(){
         return insurancePlan;
     }
-    public void setInsurancePlan(healthInsurancePlan insurancePlan){
+    public void setInsurancePlan(HealthInsurancePlan insurancePlan){
         this.insurancePlan = insurancePlan;
     }
     public int getAge() {

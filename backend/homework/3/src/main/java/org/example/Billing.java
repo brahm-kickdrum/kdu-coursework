@@ -1,9 +1,9 @@
 package org.example;
-public class billing {
-    public static double[] computePaymentAmount(patient patient, double amount) {
+public class Billing {
+    public static double[] computePaymentAmount(Patient patient, double amount) {
         double[] payments = new double[2];
 
-        healthInsurancePlan patientInsurancePlan = patient.getInsurancePlan();
+        HealthInsurancePlan patientInsurancePlan = patient.getInsurancePlan();
 
         if(patientInsurancePlan == null){
             payments[0] = 20;
