@@ -18,6 +18,7 @@ public class Main {
             factorsCalculator.join();
         }
         catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Re-interrupt the current thread
             log.logError(e.getMessage());
         }
 
