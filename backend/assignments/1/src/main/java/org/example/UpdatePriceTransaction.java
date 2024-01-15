@@ -1,3 +1,5 @@
+package org.example;
+
 public class UpdatePriceTransaction implements Transaction {
     private String type = "UPDATE_PRICE";
     private String coin;

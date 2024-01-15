@@ -1,13 +1,15 @@
-public class SellTransaction implements Transaction {
-    private String type = "SELL";
+package org.example;
+
+public class BuyTransaction implements Transaction {
+    private String type = "BUY";
     private String coin;
     private int quantity;
     private String walletAddress;
 
-    public SellTransaction() {
+    public BuyTransaction() {
     }
 
-    public SellTransaction(String coin, int quantity, String walletAddress) {
+    public BuyTransaction(String coin, int quantity, String walletAddress) {
         this.coin = coin;
         this.quantity = quantity;
         this.walletAddress = walletAddress;

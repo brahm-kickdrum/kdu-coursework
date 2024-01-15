@@ -1,3 +1,5 @@
+package org.example;
+
 public class Trader {
 
     String firstName;

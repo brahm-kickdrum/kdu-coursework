@@ -1,14 +1,12 @@
+package org.example;
 
-import org.example.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-import static org.example.TransactionReader.readTransactionsFromFile;
-
 public class ExecuteTransaction implements Runnable {
-    LoggerService log = new LoggerService();
+    LoggerFile log = new LoggerFile();
     private CountDownLatch latch;
     private List<Transaction> transactions; // Declare transactions as an instance variable
     private CoinList coinArr;

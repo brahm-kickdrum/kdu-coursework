@@ -1,3 +1,5 @@
+package org.example;
+
 public class AddVolumeTransaction implements Transaction {
     private String type = "ADD_VOLUME";
     private String coin;

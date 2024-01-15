@@ -1,3 +1,4 @@
+package org.example;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -9,7 +10,7 @@ import static org.example.TransactionReader.readTransactionsFromFile;
 
 public class Main {
 
-    private static final LoggerService log = new LoggerService();
+    private static final LoggerFile log = new LoggerFile();
 
     public static void main(String[] args) {
 
@@ -18,28 +19,11 @@ public class Main {
         String tradersCsvFile = "src/main/resources/traders.csv";
 
         TraderList traderArr = new TraderList();
-        traderArr.makeTradersList(tradersCsvFile);
+        traderArr.readTraderCSV(tradersCsvFile);
 
         CoinList coinArr = new CoinList(traderArr);
-        coinArr.makeCoinList(coinsCsvFile);
+        coinArr.readCoinCSV(coinsCsvFile);
 
-        String targetCoinName = "Bitcoin";
-        Coin targetCoin = coinArr.retrieveCoinDetails(targetCoinName);
-        if (targetCoin != null) {
-            log.logInfo("Coin found: " + targetCoin);
-        } else {
-            log.logInfo("Coin not found with name: " + targetCoinName);
-        }
-
-
-        String firstName = "Flo";
-        String lastName = "Bookamer";
-        Trader targetTrader = traderArr.retrieveTraderDetails(firstName, lastName);
-        if (targetTrader != null) {
-            log.logInfo("Trader found: " + targetTrader);
-        } else {
-            log.logInfo("Trader not found with name: " + firstName);
-        }
 
         coinArr.getTopNCoins(5);
 
