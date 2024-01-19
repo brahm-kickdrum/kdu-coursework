@@ -72,9 +72,10 @@ public class ReadFile {
                     if(p2.getWickets()> p1.getWickets()){
                         return 1;
                     }
-                    else{
+                    else if(p2.getWickets()<p1.getWickets()){
                         return -1;
                     }
+                    else return 0;
                 })
                 .limit(1).forEach(p-> LoggerFile.logInfo("Highest wicket taker is " + p.getName() + " with " + p.getWickets() + " wickets"));
 
@@ -85,9 +86,10 @@ public class ReadFile {
                     if(p2.getRuns()> p1.getRuns()){
                         return 1;
                     }
-                    else{
-                        return 0;
+                    else if(p2.getRuns()<p1.getRuns()){
+                        return -1;
                     }
+                    else return 0;
                 })
                 .limit(1).forEach(p-> LoggerFile.logInfo("Highest run scorer is " + p.getName() + " with " + p.getRuns() + " runs"));
 
@@ -98,11 +100,12 @@ public class ReadFile {
                     if(p2.getRuns()> p1.getRuns()){
                         return 1;
                     }
-                    else{
-                        return 0;
+                    else if(p2.getRuns()<p1.getRuns()){
+                        return -1;
                     }
+                    else return 0;
                 })
-                .limit(3).forEach(p-> LoggerFile.logInfo("Name : " + p.getName() ));
+                .limit(3).forEach(p-> LoggerFile.logInfo(p.getName() + "has "+ p.getRuns() + " runs"));
     }
     public void topThreeWicketTakers(List<Player> playerArray){
         playerArray.stream()
@@ -110,11 +113,12 @@ public class ReadFile {
                     if(p2.getWickets()> p1.getWickets()){
                         return 1;
                     }
-                    else{
+                    else if(p2.getWickets()<p1.getWickets()){
                         return -1;
                     }
+                    else return 0;
                 })
-                .limit(3).forEach(p-> LoggerFile.logInfo("Name " + p.getName() + "has " + p.getWickets() + " wickets"));
+                .limit(3).forEach(p-> LoggerFile.logInfo(p.getName() + "has " + p.getWickets() + " wickets"));
 
     }
 }
