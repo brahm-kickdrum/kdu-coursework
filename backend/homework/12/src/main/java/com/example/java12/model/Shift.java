@@ -11,7 +11,7 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class Shift extends BaseEntity {
+public class Shift extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -35,5 +35,4 @@ public class Shift extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Tenant tenant;
-
 }

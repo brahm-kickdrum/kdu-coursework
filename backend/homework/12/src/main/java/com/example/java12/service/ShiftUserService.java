@@ -31,6 +31,11 @@ public class ShiftUserService {
         return shiftUserRepo.findAll();
     }
 
+    /**
+     * deleteShiftUser deletes the shift user who is s working in a shift that ends at 23:00 UTC
+     * @param shiftUserId
+     * @throws CustomNotFoundException
+     */
     public void deleteShiftUser(UUID shiftUserId) throws CustomNotFoundException {
         List<ShiftUser> shiftUsers = shiftUserRepo.findByShiftEndTimeAndId(LocalTime.of(23, 0), shiftUserId);
 

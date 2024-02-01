@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 
 @Data
 @MappedSuperclass
-public class BaseEntity {
+public class Base {
     private Timestamp createdAt;
 
     private String createdBy;

@@ -10,7 +10,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "shift_types")
-public class ShiftType extends BaseEntity {
+public class ShiftType extends Base {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

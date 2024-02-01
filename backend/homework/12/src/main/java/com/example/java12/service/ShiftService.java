@@ -30,6 +30,12 @@ public class ShiftService {
         return shiftRepository.findAll();
     }
 
+    /**
+     * findTop3ShiftsByDateRange finds top 3 shifts in ascending order
+     * @param startDate start date of the duration
+     * @param endDate end date of the duration
+     * @return
+     */
     public List<Shift> findTop3ShiftsByDateRange(LocalDate startDate, LocalDate endDate) {
         return shiftRepository.findTop3ShiftsByDateRange(startDate, endDate);
     }

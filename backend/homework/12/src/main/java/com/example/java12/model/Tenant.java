@@ -12,7 +12,7 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class Tenant extends BaseEntity {
+public class Tenant extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;

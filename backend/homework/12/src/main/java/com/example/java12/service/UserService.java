@@ -31,6 +31,13 @@ public class UserService {
         return userRepo.findAll();
     }
 
+    /**
+     * updateUserDetails is used to update a user's details
+     * @param userId
+     * @param username
+     * @param loggedIn
+     * @param timeZone
+     */
     public void updateUserDetails(UUID userId, String username, int loggedIn, String timeZone) {
         userRepo.updateUserDetails(userId, username, loggedIn, timeZone);
     }

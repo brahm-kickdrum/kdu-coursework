@@ -16,7 +16,6 @@ public class ShiftTypeService {
     public ShiftTypeService(ShiftTypeRepo shiftTypeRepo) {
         this.shiftTypeRepo = shiftTypeRepo;
     }
-    //..............
 
     public void saveShiftType(ShiftType shiftType) {
         shiftTypeRepo.save(shiftType);

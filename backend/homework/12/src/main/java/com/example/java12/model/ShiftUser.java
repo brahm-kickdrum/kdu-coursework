@@ -9,7 +9,7 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class ShiftUser extends BaseEntity {
+public class ShiftUser extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
