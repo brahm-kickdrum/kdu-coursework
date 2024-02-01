@@ -26,8 +26,7 @@ public class ShiftType extends BaseEntity {
     @Column(length = 32)
     private String timeZone;
 
-    @ManyToOne
-    @JoinColumn(name = "tenant_id")
+    @ManyToOne(fetch = FetchType.EAGER)
     private Tenant tenant;
 
     public enum Type {

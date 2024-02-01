@@ -4,7 +4,6 @@ import com.example.java12.exceptions.CustomNotFoundException;
 import com.example.java12.model.ShiftUser;
 import com.example.java12.repository.ShiftUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;

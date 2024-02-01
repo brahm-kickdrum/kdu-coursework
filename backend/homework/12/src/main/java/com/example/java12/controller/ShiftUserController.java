@@ -4,7 +4,6 @@ import com.example.java12.exceptions.CustomNotFoundException;
 import com.example.java12.model.ShiftUser;
 import com.example.java12.service.ShiftUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +20,13 @@ public class ShiftUserController {
         this.shiftUserService = shiftUserService;
     }
 
-    @PostMapping
+    @PostMapping("/shift-user")
     public ResponseEntity<String> saveShiftUser(@RequestBody ShiftUser shiftUser) {
         shiftUserService.saveShiftUser(shiftUser);
         return new ResponseEntity<>("ShiftUser saved successfully", HttpStatus.CREATED);
     }
 
-    @GetMapping("/{shiftUserId}")
+    @GetMapping("/shift-user/{shiftUserId}")
     public ResponseEntity<ShiftUser> getShiftUserById(@PathVariable UUID shiftUserId) {
         ShiftUser retrievedShiftUser = shiftUserService.getShiftUserById(shiftUserId);
         if (retrievedShiftUser != null) {
@@ -37,13 +36,13 @@ public class ShiftUserController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/shift-user")
     public ResponseEntity<List<ShiftUser>> getAllShiftUsers() {
         List<ShiftUser> allShiftUsers = shiftUserService.getAllShiftUsers();
         return new ResponseEntity<>(allShiftUsers, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{shiftUserId}")
+    @DeleteMapping("/shift-user/{shiftUserId}")
     public ResponseEntity<String> deleteShiftUser(@PathVariable UUID shiftUserId) throws CustomNotFoundException {
         shiftUserService.deleteShiftUser(shiftUserId);
         return new ResponseEntity<>("ShiftUser deleted successfully", HttpStatus.OK);

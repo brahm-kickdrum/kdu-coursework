@@ -19,13 +19,13 @@ public class ShiftTypeController {
         this.shiftTypeService = shiftTypeService;
     }
 
-    @PostMapping
+    @PostMapping("/shift-type")
     public ResponseEntity<String> saveShiftType(@RequestBody ShiftType shiftType) {
         shiftTypeService.saveShiftType(shiftType);
         return new ResponseEntity<>("ShiftType saved successfully", HttpStatus.CREATED);
     }
 
-    @GetMapping("/{shiftTypeId}")
+    @GetMapping("/shift-type/{shiftTypeId}")
     public ResponseEntity<ShiftType> getShiftTypeById(@PathVariable UUID shiftTypeId) {
         ShiftType retrievedShiftType = shiftTypeService.getShiftTypeById(shiftTypeId);
         if (retrievedShiftType != null) {
@@ -35,7 +35,7 @@ public class ShiftTypeController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/shift-type")
     public ResponseEntity<List<ShiftType>> getAllShiftTypes() {
         List<ShiftType> allShiftTypes = shiftTypeService.getAllShiftTypes();
         return new ResponseEntity<>(allShiftTypes, HttpStatus.OK);

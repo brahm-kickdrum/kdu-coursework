@@ -15,20 +15,20 @@ import java.util.UUID;
 
 @RestController
 public class UserController {
-    private final UserService userService;
+    public UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @PostMapping
+    @PostMapping("/user")
     public ResponseEntity<String> saveUser(@RequestBody User user) {
         userService.saveUser(user);
         return new ResponseEntity<>("User saved successfully", HttpStatus.CREATED);
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/user/{userId}")
     public ResponseEntity<User> getUserById(@PathVariable UUID userId) {
         User retrievedUser = userService.getUserById(userId);
         if (retrievedUser != null) {
@@ -38,13 +38,13 @@ public class UserController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/user")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> allUsers = userService.getAllUsers();
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
 
-    @PutMapping("/{userId}")
+    @PutMapping("/user/{userId}")
     public ResponseEntity<String> updateUserDetails(@PathVariable UUID userId, @RequestParam String username, @RequestParam int loggedIn, @RequestParam String timeZone) {
         try {
             userService.updateUserDetails(userId, username, loggedIn, timeZone);
@@ -53,7 +53,7 @@ public class UserController {
             return new ResponseEntity<>("Failed to update user details. User not found.", HttpStatus.NOT_FOUND);
         }
     }
-    @GetMapping("/all")
+    @GetMapping("/user/all")
     public ResponseEntity<Page<User>> findAllUsers(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "50") int size) {

@@ -43,7 +43,7 @@ public class ShiftController {
         return new ResponseEntity<>(allShifts, HttpStatus.OK);
     }
 
-    @GetMapping("/top3")
+    @GetMapping("/shift/top3")
     public ResponseEntity<List<Shift>> getTop3ShiftsByDateRange(
             @RequestParam("startDate") @DateTimeFormat(pattern = "dd-MMM-yyyy") LocalDate startDate,
             @RequestParam("endDate") @DateTimeFormat(pattern = "dd-MMM-yyyy") LocalDate endDate) {

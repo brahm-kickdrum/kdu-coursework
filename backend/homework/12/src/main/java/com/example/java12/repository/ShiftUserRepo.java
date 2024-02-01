@@ -10,5 +10,5 @@ import java.util.UUID;
 
 @Repository
 public interface ShiftUserRepo extends JpaRepository<ShiftUser, UUID> {
-    List<ShiftUser> findByShiftEndTimeAndId(LocalTime endTime, UUID shiftUserId);
+    List<ShiftUser> findByShiftEndTimeAndId(LocalTime timeEnd, UUID shiftUserId);
 }
