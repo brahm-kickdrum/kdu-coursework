@@ -1,0 +1,240 @@
+*{
+    padding: 0;
+    border: 0;
+    margin:0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    background-color: #FAA0A5;
+}
+
+body{
+    height: 100vh;
+}
+
+html{
+    font-size: 20px;
+}
+
+
+
+
+
+@media screen and (min-width:768px){
+
+    #header{
+        display: flex;
+        justify-content: space-between;
+        padding: 1.5rem 4rem 0rem;
+    
+        #top-coffee{
+            color: white;
+            font-weight: 600;
+        }
+    
+        #nav-items{
+            display: flex;
+            flex-direction: row;
+            color: white;
+    
+            .nav{
+                padding: 0 1.5rem;
+                font-weight: 600;
+            }
+        }
+    }
+
+    #main{
+        display: flex;
+        
+        #text-button{
+            padding: 5rem 0 5rem 4rem;
+    
+            #large-text{
+                font-size: 4.5rem;
+                color: white;
+                font-weight: 600;
+                line-height: 6rem;
+    
+            }
+    
+            #small-text{
+                color: white;
+                font-weight: 600;
+                padding: 1rem 0;
+            }
+    
+            #button{
+                background-color: #BE5569;
+                color: white;
+                padding:1rem;
+                width: 9rem;
+                font-size: 1rem;
+                font-weight: 500;
+                margin: 1rem 0;
+                border-radius: 0.5rem;
+            }
+        }
+    
+        #image{
+            justify-content: flex-end;
+            img{
+                padding: 8rem 0;
+                width: 100%;
+            }
+        }
+    }
+    
+}
+
+@media screen and (min-width:577px) and (max-width:768px){
+
+    #header{
+        display: flex;
+        justify-content: space-between;
+        padding: 1.5rem 2rem 3rem;
+    
+        #top-coffee{
+            color: white;
+            font-weight: 600;
+        }
+    
+        #nav-items{
+            display: flex;
+            flex-direction: row;
+            color: white;
+    
+            .nav{
+                padding: 0 1.5rem;
+                font-weight: 600;
+            }
+        }
+    }
+
+    html{
+        font-size: 13px;
+    }
+
+    #main{
+        display: flex;
+        
+        #text-button{
+            width: 60%;
+            padding: 5rem 2rem;
+    
+            #large-text{
+                font-size: 5rem;
+                color: white;
+                font-weight: 600;
+                line-height: 6rem;
+    
+                p{
+                    padding:0.5rem 0;
+                }
+            }
+    
+            #small-text{
+                color: white;
+                font-weight: 600;
+                padding: 1rem 0;
+            }
+    
+            #button{
+                background-color: #BE5569;
+                color: white;
+                padding:1rem;
+                width: 9rem;
+                font-size: 1rem;
+                font-weight: 500;
+                margin: 2rem 0;
+                border-radius: 0.5rem;
+            }
+        }
+    
+        #image{
+            justify-content: flex-end;
+            img{
+                padding: 8rem 0;
+                width: 100%;
+            }
+        }
+    }
+    
+}
+
+@media screen and (max-width:576px){
+
+    #header{
+        display: flex;
+        justify-content: space-between;
+        padding: 1.5rem 1.5rem 2rem;
+    
+        #top-coffee{
+            color: white;
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+    
+        #nav-items{
+            display: flex;
+            flex-direction: row;
+            color: white;
+            display: none;
+    
+            .nav{
+                padding: 0 1.5rem;
+                font-weight: 600;
+            }
+        }
+    }
+
+    html{
+        font-size: 20px;
+    }
+
+    #main{
+        display: flex;
+        flex-direction: column-reverse;
+        
+        #text-button{
+            // width: 60%;
+            padding: 0rem 1.5rem;
+    
+            #large-text{
+                font-size: 3rem;
+                color: white;
+                font-weight: 600;
+                line-height: 3rem;
+    
+                p{
+                    padding:0.5rem 0;
+                }
+            }
+    
+            #small-text{
+                color: white;
+                font-weight: 600;
+                padding: 1rem 0;
+                font-size: 1.2rem;
+            }
+    
+            #button{
+                background-color: #BE5569;
+                color: white;
+                padding:1.2rem;
+                width: 11rem;
+                font-size: 1.2rem;
+                font-weight: 500;
+                margin: 2rem 0;
+                border-radius: 0.5rem;
+            }
+        }
+    
+        #image{
+            justify-content: flex-end;
+            img{
+                width: 100%;
+            }
+        }
+    }
+    
+}
