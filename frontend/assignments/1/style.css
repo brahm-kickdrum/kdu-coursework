@@ -1,0 +1,243 @@
+* {
+  padding: 0;
+  border: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: #000000;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+}
+
+html {
+  font-size: 8px;
+}
+
+@media screen and (min-width: 415px) {
+  html {
+    font-size: 8px;
+  }
+  .main-page {
+    display: flex;
+  }
+  .main-page .navigation-section {
+    width: 39rem;
+  }
+  .main-page .navigation-section .profile {
+    display: none;
+  }
+  .main-page .navigation-section .x {
+    margin: 0 3.1rem 0 5.5rem;
+    fill: #E7E9EA;
+    width: 3.8rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.6rem;
+  }
+  .main-page .navigation-section .navigation {
+    margin: 0 3.1rem 0 5.5rem;
+  }
+  .main-page .navigation-section .navigation .nav-items {
+    display: flex;
+    padding: 1.4rem 1rem 1.3rem 0;
+    flex-direction: row;
+    align-items: center;
+  }
+  .main-page .navigation-section .navigation .nav-items .nav-img {
+    fill: #E7E9EA;
+    width: 3.3rem;
+    margin-right: 2.5rem;
+  }
+  .main-page .navigation-section .navigation .nav-items .nav-text {
+    color: #E7E9EA;
+    font-size: 2.5rem;
+  }
+  .main-page .navigation-section .navigation .nav-items-mobile {
+    display: none;
+  }
+  .main-page .navigation-section .post-button {
+    margin: 1.5rem 3.1rem 0 3.5rem;
+    background-color: #1D9BF0;
+    width: 29rem;
+    height: 6.5rem;
+    display: flex;
+    justify-content: center;
+    border-radius: 6rem;
+  }
+  .main-page .navigation-section .post-button button {
+    color: #E7E9EA;
+    background-color: #1D9BF0;
+    font-size: 2.2rem;
+  }
+  .main-page .navigation-section .footer {
+    margin: 10rem 3.1rem 0 5.2rem;
+    padding-bottom: 1.5rem;
+    display: flex;
+  }
+  .main-page .navigation-section .footer .img img {
+    width: 5rem;
+    border-radius: 3rem;
+  }
+  .main-page .navigation-section .footer .id {
+    padding-left: 2rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: #E7E9EA;
+    font-size: 2rem;
+  }
+  .main-page .navigation-section .footer .dots {
+    display: flex;
+    padding-left: 7rem;
+    font-size: 3rem;
+    align-items: center;
+    color: #E7E9EA;
+  }
+  .main-page .tweet-box {
+    display: flex;
+  }
+  .main-page .tweet-box .tweet-profile-pic img {
+    width: 5rem;
+    border-radius: 3rem;
+  }
+  .main-page .tweet-box .tweet-bar .add-bar {
+    display: flex;
+  }
+  .main-page .tweet-box .tweet-bar .add-bar .add {
+    display: flex;
+  }
+  .main-page .tweet-box .tweet-bar .add-bar .add .add-items {
+    fill: #1D9BF0;
+    width: 5rem;
+  }
+  .main-page .tweet-box .tweet-bar .add-bar .add .add-items .map {
+    fill: #0F4E78;
+  }
+  .main-page .tweet-box .tweet-bar .add-bar .tweet-btn button {
+    color: #808080;
+    font-size: 3rem;
+    background-color: #0F4E78;
+    padding: 2rem;
+    border-radius: 5rem;
+    width: 15rem;
+  }
+}
+@media screen and (max-width: 414px) {
+  .navigation-section {
+    width: 35rem;
+  }
+  .navigation-section .profile-icon {
+    display: flex;
+    justify-content: space-between;
+  }
+  .navigation-section .profile-icon .profile-mobile {
+    margin: 2rem;
+    width: 5rem;
+    border-radius: 4.5rem;
+  }
+  .navigation-section .profile-icon .add .plus {
+    fill: #E7E9EA;
+    width: 4rem;
+    padding: 1rem;
+    margin: 2rem 2rem 2rem 2rem;
+    border: #71767B solid 1px;
+    border-radius: 2rem;
+  }
+  .navigation-section .x-id {
+    color: #E7E9EA;
+    font-size: 2rem;
+    padding-left: 2rem;
+  }
+  .navigation-section .id2 {
+    font-weight: 300;
+    color: #71767B;
+  }
+  .navigation-section .follow {
+    padding: 2rem 2rem 1rem;
+    display: flex;
+    font-size: 1.5rem;
+  }
+  .navigation-section .follow .following {
+    display: flex;
+  }
+  .navigation-section .follow .followers {
+    display: flex;
+  }
+  .navigation-section .follow .number {
+    color: #E7E9EA;
+    padding-right: 2px;
+  }
+  .navigation-section .follow .text {
+    color: #71767B;
+    padding-right: 5rem;
+  }
+  .navigation-section .x {
+    display: none;
+  }
+  .navigation-section .navigation {
+    margin: 0 2rem 0 2rem;
+  }
+  .navigation-section .navigation .nav-items {
+    display: flex;
+    padding: 2.5rem 0rem 1.3rem 0;
+    flex-direction: row;
+    align-items: center;
+  }
+  .navigation-section .navigation .nav-items .nav-img {
+    fill: #E7E9EA;
+    width: 3rem;
+    margin-right: 3.2rem;
+  }
+  .navigation-section .navigation .nav-items .nav-text {
+    color: #E7E9EA;
+    font-size: 2.5rem;
+  }
+  .navigation-section .navigation .logout {
+    padding-bottom: 31.5rem;
+  }
+  .navigation-section .navigation .nav-items-desktop {
+    display: none;
+  }
+  .navigation-section .navigation .nav-desktop {
+    display: none;
+  }
+  .navigation-section .post-button {
+    margin: 1.5rem 3.1rem 0 2.5rem;
+    background-color: #1D9BF0;
+    width: 29rem;
+    height: 6.5rem;
+    display: flex;
+    justify-content: center;
+    border-radius: 6rem;
+  }
+  .navigation-section .post-button button {
+    color: #E7E9EA;
+    background-color: #1D9BF0;
+    font-size: 2.2rem;
+  }
+  .navigation-section .footer {
+    margin: 10rem 3.1rem 0 3.2rem;
+    padding-bottom: 2.5rem;
+    display: flex;
+  }
+  .navigation-section .footer .img img {
+    width: 5rem;
+    border-radius: 3rem;
+  }
+  .navigation-section .footer .id {
+    padding-left: 2rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: #E7E9EA;
+    font-size: 2rem;
+  }
+  .navigation-section .footer .dots {
+    display: flex;
+    padding-left: 8rem;
+    font-size: 3rem;
+    align-items: center;
+    color: #E7E9EA;
+  }
+  .navigation-section .nav-desktop {
+    display: none;
+  }
+}/*# sourceMappingURL=style.css.map */
