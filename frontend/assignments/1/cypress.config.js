@@ -13,7 +13,7 @@ module.exports = defineConfig({
   // Configuration for end-to-end (e2e) tests
   e2e: {
     // Base URL for your application
-    baseUrl: "http://",
+    baseUrl: "http://d3pkwygysc7oh6.cloudfront.net/",
 
     // Setup Node events for visual regression testing using cypress-visual-regression plugin
     setupNodeEvents(on, config) {
@@ -27,7 +27,7 @@ module.exports = defineConfig({
     PASSWORD: "test",
     USERNAME: "test-user",
     NAME: "test-name",
-    HOME_PAGE_URL: "d3pkwygysc7oh6.cloudfront.net/",
+    HOME_PAGE_URL: "",
     LOGIN_PAGE_URL: "d3pkwygysc7oh6.cloudfront.net/",
     REGISTER_PAGE_URL: "d3pkwygysc7oh6.cloudfront.net/",
     TEST_THRESHOLD: 0.35,
