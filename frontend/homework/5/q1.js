@@ -20,7 +20,10 @@ function getSystemInfo() {
 // Writing system information JSON to a local file
 function writeSystemInfoToFile() {
     const systemInfo = getSystemInfo();
-    fs.writeFileSync('systemInfo.json', JSON.stringify(systemInfo, null, 2));
+    const message = `Hello, my name is Brahm!\nHere is my system information:\n`;
+    const jsonData = JSON.stringify(systemInfo, null, 2);
+    const dataToWrite = `${message}${jsonData}`;
+    fs.writeFileSync('systemInfo.json', dataToWrite);
 }
 
 // Function to create a simple HTTP server
