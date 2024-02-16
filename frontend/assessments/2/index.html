@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <header class="header">
+        <p>KDU stock market dashboard</p>
+    </header>
+
+    <section class="dashboard">
+        <section class="stock-details">
+            <div class="buy-sell">
+                <div class="company">
+                    <div class="company-logo">
+                        <img src="images/food-delivery.png" alt="logo">
+                    </div>
+                    <div class="company-name">
+                        Zomato
+                    </div>
+                </div>
+                <div class="price">
+                    <div class="price-text">
+                        Price
+                    </div>
+                    <div class="price-value">
+                        142.32
+                    </div>
+                    <div class="arrow">
+                        <img class="arrow-image" src="images/up-arrow.png" alt="arrow">
+                    </div>
+                    <div class="percent">
+                        3.00%
+                    </div>
+                </div>
+                <div class="quantity">
+                    <input type="textbox" class="enter-quantity" placeholder="Enter QTY">
+                </div>
+                <button class="buy">
+                    buy
+                </button>
+                <button class="sell">
+                    sell
+                </button>
+            </div>
+            <div class="graph-box">
+
+                <div class="graph">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="history">
+            <div class="history-text">
+                History
+            </div>
+            <div class="history-list">
+                <div class="history-item">
+                    <div class="history-details">
+
+                        <div class="stock-quantity-text">
+    
+                            <div class="stock-quatity">
+                                100
+                            </div>
+                            <div class="stock-text">
+                                stocks
+                            </div>
+                            <div class="stock-company">
+                                of Zomato
+                            </div>
+                        </div>
+    
+                        <div class="date-time">
+                            <div class="day">Fri</div>
+                            <div class="comma">,</div>
+                            <div class="date">02 Feb 1996</div>
+                            <div class="time">21:04:05 GMT</div>
+                        </div>
+                    </div>
+                    <div class="buy-or-sell">
+                        buy
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </section>
+
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js" integrity="sha384-Gr6Lu2Ajx28mzwyVR8CFkULdCU7kMlZ9UthllibdOSo6qAiN+yXNHqtgdTvFXMT4" crossorigin="anonymous"></script>
+    <script src="client.js"></script>
+</body>
+</html>
