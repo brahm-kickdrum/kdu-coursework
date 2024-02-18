@@ -8,10 +8,6 @@
     font-weight: 500;
 }
 
-// .profile-img{
-//     width: 20px;f
-//     background-color: #1d9bf0;
-// }
 
 html {
     font-size: 8px;
@@ -40,8 +36,6 @@ html {
 
     .main-page {
         display: flex;
-        margin: 0 15rem 0;
-        // border: #1d9bf0 1px solid;
 
         .nav-section-profile-mobile{
             display: none;
@@ -227,45 +221,15 @@ html {
                 }
             }
         }
-
-        .message-section{
-            display: none;
-            width: 100%;
-            // display: flex;
-            // border: yellow 1px solid;
-            .active-users{
-                width: 40%;
-                height: 100%;
-                border: #585959 solid;
-                border-width: 1px 1px 1px;
-
-                .messages-text{
-                    font-size: 3rem;
-                    color: #e7e9ea;
-                    padding: 2rem 3rem;
-                    border: #585959 solid;
-                    border-width: 1px 0 1px 0;
-                }
-            }
-
-            .chat{
-                width: 60%;
-                border:#585959 solid 1px;
-                p{
-                    font-size: larger;
-                }
-            }
-
-            
-        }
     }
 
     .posts {
-        // border: 1px solid #e7e9ea;
+        border: 1px solid #585959;
         display: flex;
-        // overflow-y: scroll;
-        // height: 80rem;
+        overflow-y: scroll;
+        height: 80rem;
         flex-direction: column;
+        // margin: 0 0 5rem 0;
         .post {
             width: 100%;
             border-bottom: solid 1px #585959;

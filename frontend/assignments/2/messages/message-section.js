@@ -4,7 +4,7 @@ const tweetPost = document.querySelector(".tweet-post");
 
 messagesButton.addEventListener("click", () => {
     // Show message section
-    messageSection.style.display = "flex";
+    messageSection.style.display = "block";
     messageSection.style.animation = "";
 
     // Hide tweet post
