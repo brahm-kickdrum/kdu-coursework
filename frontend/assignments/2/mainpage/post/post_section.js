@@ -1,7 +1,3 @@
-
-
-
-
 document.addEventListener('DOMContentLoaded', function () {
     const desktopPostButton = document.querySelector('#desktop-post-button');
     const postsList = document.querySelector('.posts');
@@ -9,16 +5,16 @@ document.addEventListener('DOMContentLoaded', function () {
     let text = textarea.value;
     console.log(text);
     const username = sessionStorage.getItem('username');
+    let pagenum = 0;
+    const size = 5;
 
-
-            
-         if (desktopPostButton && postsList && textarea) {
+    if (desktopPostButton && postsList && textarea) {
 
         desktopPostButton.addEventListener('click', async function () {
             let text = textarea.value; // Move this line here
             console.log(text);
-          addposts(text, username,"new");
-          
+            addposts(text, username, "new");
+
 
             try {
                 const response = await fetch('http://localhost:3001/api/posts', {
@@ -40,27 +36,26 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-    }
-    else {
+    } else {
         if (!desktopPostButton) console.error('Desktop post button not found.');
         if (!postsList) console.error('Posts list not found.');
-        if ( textarea) console.error('Text area not found.');
+        if (textarea) console.error('Text area not found.');
         if (!likeButton) console.error('Like button not found.');
     }
 
 
-    function addposts(text,username,type) {
+    function addposts(text, username, type) {
         console.log("clickedd")
         iconElement = username[0].toUpperCase();
         console.log(iconElement)
-         
+
 
         // Create a new div element
         const newPost = document.createElement('div');
         newPost.classList.add('post');
-    
 
-        newPost.innerHTML=`
+
+        newPost.innerHTML = `
         <div class="post-icon">
             <div class="profile-img">
                 ${iconElement}
@@ -115,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
         `
 
-        
+
 
         const postInputs = newPost.querySelectorAll('.post-text-input');
         postInputs.forEach(function (postInput) {
@@ -128,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const likeButton = newPost.querySelector('#like');
         likeButton.addEventListener('click', function () {
             const newSvgMarkup = `
-                <svg viewBox="0 0 24 24" aria-hidden="true" class="like" style="fill: #F91880;"><g><path d="M20.884 13.19c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"></path></g></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true" class="like" style="fill: #F91880;"><g><path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"></path></g></svg>
             `;
 
 
@@ -136,45 +131,43 @@ document.addEventListener('DOMContentLoaded', function () {
             likeButton.innerHTML = newSvgMarkup;
         });
 
-    if(type=="new"){
-        postsList.insertBefore(newPost, postsList.firstChild);
-    }
-    else{
+        if (type == "new") {
+            postsList.insertBefore(newPost, postsList.firstChild);
+        } else {
 
-        postsList.appendChild(newPost);
-    }
+            postsList.appendChild(newPost);
+        }
 
         // Clear the text area
-     textarea.value = '';
+        textarea.value = '';
 
 
     }
 
-let pagenum = 0;
-const size = 5;
 
-window.addEventListener('scroll', function() {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        // User has scrolled to the bottom of the page
-        fetchPosts();
-    }
-});
-
-function fetchPosts() {
-    fetch(`http://localhost:3001/api/posts/${pagenum}/${size}`, {
-        method: 'GET',
-    })
-    .then(response => response.json())
-    .then(posts => {
-        posts.forEach(post => {
-            addposts(post.post_content, post.user_name,"scroll");
-        });
-        pagenum++;
+    postsList.addEventListener('scroll', function () {
+        if (postsList.scrollTop + postsList.clientHeight >= postsList.scrollHeight) {
+            // User has scrolled to the bottom of the .posts div
+            fetchPosts();
+        }
     });
-}
 
-// Call fetchPosts once to load the initial set of posts
-fetchPosts();
 
-   
+    function fetchPosts() {
+        fetch(`http://localhost:3001/api/posts/${pagenum}/${size}`, {
+                method: 'GET',
+            })
+            .then(response => response.json())
+            .then(posts => {
+                posts.forEach(post => {
+                    addposts(post.post_content, post.user_name, "scroll");
+                });
+                pagenum++;
+            });
+    }
+
+    // Call fetchPosts once to load the initial set of posts
+    fetchPosts();
+
+
 });

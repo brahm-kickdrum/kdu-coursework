@@ -22,33 +22,16 @@ app.use(express.static("mainpage"));
 app.use('/api', require('./routes/api/login-api.js'));
 app.use('/api', require('./routes/api/post-api.js'));
 
-// app.listen(port, () => {
-//     console.log('Server is running on port 3000');
-// });
 
 io.on("connection", (socket) => {
-try
-    {    console.log("A user connected");
+    console.log("connection created");
 
-    // Listen for a login event from the client
-    socket.on("login", (username) => {
-      console.log(username)
-        // Broadcast the user's name to all connected clients
-        io.emit("userLoggedIn", username);
+    socket.on("message", payload => {
+        console.log("Payload", payload);
+        // Emitting the message along with the username to all clients except the sender
+        socket.broadcast.emit("new-message", { username: payload.username, message: payload.message });
     });
-
-    // Handle disconnect event
-    socket.on("disconnect", () => {
-        console.log("A user disconnected");
-    });}
-    catch(error)
-    
-    {
-        console.log(error);
-    }
 });
-
-
 
 server.listen(3001, () => {
   console.log("Server started on 3001");
