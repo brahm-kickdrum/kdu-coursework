@@ -1,8 +1,11 @@
-import "./Seach.scss"
-import { IHeader } from "../Header";
+import "./Seach.scss";
+import { SearchBarContext } from "../../SearchBarProvider";
+import { useContext } from "react";
 
-export function Search({searchBar, setSearchBar}:IHeader){
+export function Search(){
     
+    const { searchBar, setSearchBar } = useContext(SearchBarContext);
+
     function searchHandler(event : any){
         setSearchBar(event.target.value);
         console.log(event.target.value);

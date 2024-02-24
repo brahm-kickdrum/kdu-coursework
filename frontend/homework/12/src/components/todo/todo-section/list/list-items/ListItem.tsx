@@ -1,10 +1,5 @@
+import { IListItem } from "../../../../../../src/interfaces/IListItem";
 import "./ListItem.scss"
-
-interface IListItem {
-  text: string;
-  id: string;
-  onRemove: (id: string) => void;
-}
 
 export function ListItem({ text, id, onRemove }: IListItem) {
   const handleRemove = () => {

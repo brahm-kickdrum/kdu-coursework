@@ -1,17 +1,16 @@
 import { ListItem } from "./list-items/ListItem";
 import "./List.scss";
-import { ITodoItem } from "../TodoSection";
+import { ITodoItem } from '../../../../interfaces/ITodoItem';
+import { useContext } from "react";
+import { ISearchBarContext, SearchBarContext } from "../../SearchBarProvider";
+import { ITodoListContext, TodoListContext } from '../../../../TodoListProvider';
 
-export interface IList {
-    todoList: ITodoItem[],
-    setList: React.Dispatch<React.SetStateAction<ITodoItem[]>>,
-    searchBar: string
-}
-
-export function List({ todoList, setList, searchBar}: IList) {
+export function List() {
+    const { todoList, setTodoList } = useContext<ITodoListContext>(TodoListContext);
+    const { searchBar} = useContext<ISearchBarContext>(SearchBarContext);
     const handleRemoveItem = (id: string) => {
         const updatedList = todoList.filter(item => item.id !== id);
-        setList(updatedList);
+        setTodoList(updatedList);
     };
 
     const filteredList = todoList.filter(item =>

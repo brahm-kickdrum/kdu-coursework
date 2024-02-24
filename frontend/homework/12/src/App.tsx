@@ -1,19 +1,15 @@
-
-import { useState } from 'react';
 import './App.css';
-import {Todo} from './components/todo/TodoList';
-import { v4 as uuidv4 } from 'uuid';
-
+import { Todo } from './components/todo/TodoList';
+import { TodoListProvider } from './TodoListProvider';
 
 function App() {
-  const [todoList, setList]  = useState([
-    {
-      id :  uuidv4(),
-      text : "Hands on"
-    }
-  ]);
+  
+
   return (
-    <Todo todoList = {todoList} setList = {setList} />
+    <TodoListProvider>
+      <Todo />
+    </TodoListProvider>
+  
   );
 }
 

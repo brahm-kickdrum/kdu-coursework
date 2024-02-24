@@ -1,16 +1,14 @@
+import { useContext } from 'react';
+import { ITodoListContext, TodoListContext } from '../../../../TodoListProvider';
+import { ITodoInputContext, TodoInputContext } from '../TodoInputProvider';
 import "./TodoInput.scss";
 import { v4 as uuidv4 } from 'uuid'; 
 
-import { ITodoItem } from "../TodoSection";
 
-interface ITodoInput{
-    todoInput : string,
-    setTodoInput : React.Dispatch<React.SetStateAction<string>>,
-    todoList : ITodoItem[],
-    setList : React.Dispatch<React.SetStateAction<ITodoItem[]>>
-}
+export function TodoInput(){
+    const { todoList, setTodoList } = useContext<ITodoListContext>(TodoListContext);
+    const { todoInput, setTodoInput} = useContext<ITodoInputContext>(TodoInputContext);
 
-export function TodoInput({todoInput, setTodoInput, todoList, setList}: ITodoInput){
 
     function changeHandler(event: any) {
         setTodoInput(event.target.value)
@@ -24,7 +22,7 @@ export function TodoInput({todoInput, setTodoInput, todoList, setList}: ITodoInp
                 id: uuidv4(), 
                 text: todoInput
             };
-            setList([...todoList, newItem]);
+            setTodoList([...todoList, newItem]);
             setTodoInput('');
         }
     }
