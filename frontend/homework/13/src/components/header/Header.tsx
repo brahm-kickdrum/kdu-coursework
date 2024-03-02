@@ -3,10 +3,21 @@ import { SearchBar } from "./seachbar/SearchBar";
 import { Sort } from "./sort/Sort";
 
 export function Header() {
+
+    const header: React.CSSProperties = {
+        display: "flex",
+        alignItems: "center"
+    }
+
+    const filterSection: React.CSSProperties = {
+        display: "flex",
+        alignItems: "center"
+    }
+ 
     return ( 
-        <div>
+        <div style={header}>
             <SearchBar />
-            <div>
+            <div style={filterSection}>
                 <Filter />
                 <Sort />
             </div>

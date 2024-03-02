@@ -1,7 +1,5 @@
 import { createContext, useState } from "react";
 
-
-
 export interface IRating {
     rate: number;
     count: number;

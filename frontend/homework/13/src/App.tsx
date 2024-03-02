@@ -3,19 +3,25 @@ import { Homepage } from "./components/HomePage"
 import { ProductListProvider } from "./contexts/ProductListProvider"  // Import the ProductListProvider here
 import { Product } from "./components/Product"
 import { SearchProvider } from "./contexts/SearchQueryProvider"
+import { FilterProvider } from "./contexts/FilterProvider"
+import { SortProvider } from "./contexts/SortProvider"
 
 function App() {
   return (
     <div>
       <BrowserRouter>
-        <SearchProvider>
-          <ProductListProvider>  {/* Provide the ProductListProvider here */}
-            <Routes>
-              <Route path="/" element={<Homepage />} />
-              <Route path="/:id" element={<Product />} />
-            </Routes>
-          </ProductListProvider>
-        </SearchProvider>
+        <FilterProvider>
+          <SortProvider>
+            <SearchProvider>
+              <ProductListProvider> 
+                <Routes>
+                  <Route path="/" element={<Homepage />} />
+                  <Route path="/:id" element={<Product />} />
+                </Routes>
+              </ProductListProvider>
+            </SearchProvider>
+          </SortProvider>
+        </FilterProvider>
       </BrowserRouter>
     </div>
   )
