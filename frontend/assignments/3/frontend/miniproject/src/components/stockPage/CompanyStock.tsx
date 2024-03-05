@@ -1,18 +1,25 @@
 import { FormControl, MenuItem, Select } from '@mui/material';
 import { createUseStyles } from 'react-jss';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { SelectChangeEvent } from '@mui/material/Select';
 import ChartComponent from './Graph';
-import '../../../public/up.png'
+import UP from '../../../public/up.png';
+import DOWN from '../../../public/down.png';
+import { useState } from 'react';
+import { Status, addTransaction } from '../../redux/TransactionsSlice';
+import { Type, addUserTransaction } from '../../redux/UserTransactionsSlice';
+import { History } from './History';
 
 export function CompanyStock() {
 	const style = createUseStyles({
+		stockpage: {
+			display: "flex"
+		},
 		stocksSection: {
 			margin: "3rem 5rem",
-			width: "70vw",
-			// border: "black solid 1px",
+			width: "65vw",
 			display: "flex",
 			alignItems: "center",
 			justifyContent: "space-between"
@@ -44,15 +51,16 @@ export function CompanyStock() {
 			alignItems: "center",
 			border: "1px solid #757575",
 			padding: "1.25rem",
-			width: "20rem",
-			justifyContent: "space-around"
+			width: "16rem",
+			justifyContent: "space-between"
 		},
 		price: {
 			display: "flex",
 			alignItems: "center",
 		},
 		priceValue: {
-
+			width: "3rem",
+			textAlign: "right"
 		},
 		quantitySection: {
 			fontSize: "1.3rem",
@@ -63,7 +71,7 @@ export function CompanyStock() {
 			fontSize: "1.3rem",
 			backgroundColor: "#b2f2bb",
 			color: "#2f9e44",
-			padding: "1.25rem",
+			padding: "1.45rem",
 			width: "7rem",
 			textAlign: "center",
 			border: "1px solid #2f9e44"
@@ -72,13 +80,41 @@ export function CompanyStock() {
 			fontSize: "1.3rem",
 			backgroundColor: "#ffc9c9",
 			color: "#e03131",
-			padding: "1.25rem",
+			padding: "1.45rem",
 			width: "7rem",
 			textAlign: "center",
 			border: "1px solid #e03131"
 		},
 		graph: {
-			width: "70vw"
+			width: "65vw",
+			margin: "0 5rem"
+		},
+		upDownImage: {
+			width: "1.8rem"
+		},
+		percentage: {
+			width: "4rem",
+			fontSize: "1rem",
+			textAlign: "center"
+
+		},
+		historySection: {
+			width: "35vw",
+			margin: "3rem 5rem 0 0",
+			// height: "35vh",
+			display: "flex",
+			flexDirection: "column",
+			justifyContent: "space-between"
+		},
+		history: {
+			border: "solid 1px black",
+			height: "41vh",
+			padding: "1.25rem"
+		},
+		logs: {
+			border: "solid 1px black",
+			height: "33vh",
+			padding: "1.5rem"
 		}
 	});
 
@@ -86,79 +122,175 @@ export function CompanyStock() {
 	const navigate = useNavigate();
 	const styles = style();
 
+	const dispatch = useDispatch();
+
+	const [wallet, setWallet] = useState<number>(5000);
+	const [quantity, setQuantity] = useState<number | null>(null);
+
 	const stockBasePriceList = useSelector((state: RootState) => state.stockList.stockBasePriceList);
 	const selectedStockItem = stockBasePriceList.find(stockItem => stockItem.stock_name === stockName);
 	const basePrice = selectedStockItem ? selectedStockItem.base_price : '';
+	const [currentValue, setCurrentValue] = useState<number>(parseInt(String(basePrice)));
+	const [percentageChange, setPercentageChange] = useState<number>(0);
+
 	const handleChange = (event: SelectChangeEvent<string>) => {
 		const selectedCompany = event.target.value;
 		navigate(`/company-stock/${selectedCompany}`);
 	};
 
+	const handleBuy = () => {
+		if (!selectedStockItem) {
+			console.error('Selected stock item is undefined');
+			return;
+		}
+		if (!quantity) {
+			console.error('Enter quantity before buying');
+			return;
+		}
+		const totalCost = currentValue * quantity;
+		if (totalCost <= wallet) {
+			dispatch(addUserTransaction({
+				stock_name: selectedStockItem.stock_name,
+				stock_symbol: selectedStockItem.stock_symbol,
+				transaction_price: currentValue,
+				timestamp: new Date().toISOString(),
+				status: Status.Passed,
+				quantity: quantity,
+				type: Type.Buy
+			}));
+			dispatch(addTransaction({
+				stock_name: selectedStockItem.stock_name,
+				stock_symbol: selectedStockItem.stock_symbol,
+				transaction_price: currentValue,
+				timestamp: new Date().toISOString(),
+				status: Status.Passed
+			}));
+			setWallet(wallet - totalCost);
+			setQuantity(null);
+			console.log("Transaction successful")
+			console.log(wallet)
+		} else {
+			console.log("Insufficient funds");
+
+		}
+	};
+
+	const handleSell = () => {
+		if (!selectedStockItem) {
+			console.error('Selected stock item is undefined');
+			return;
+		}
+		if (!quantity) {
+			console.error('Enter quantity before selling');
+			return;
+		}
+		const totalPrice = currentValue * quantity;
+		setWallet(wallet + totalPrice);
+
+		dispatch(addUserTransaction({
+			stock_name: selectedStockItem.stock_name,
+			stock_symbol: selectedStockItem.stock_symbol,
+			transaction_price: currentValue,
+			timestamp: new Date().toISOString(),
+			status: Status.Passed,
+			quantity: quantity,
+			type: Type.Sell
+		}));
+
+		dispatch(addTransaction({
+			stock_name: selectedStockItem.stock_name,
+			stock_symbol: selectedStockItem.stock_symbol,
+			transaction_price: currentValue,
+			timestamp: new Date().toISOString(),
+			status: Status.Passed
+		}));
+
+		setQuantity(0);
+		console.log("Sell transaction successful");
+		console.log(wallet);
+	};
+
 	return (
-		<div>
-
-			<div className={styles.stocksSection}>
-				<div >
-					<FormControl className={styles.companyName}>
-						<Select
-							value={stockName}
-							onChange={handleChange}
-							MenuProps={{
-								PaperProps: {
-									style: {
-										maxHeight: 300,
+		<div className={styles.stockpage}>
+			<div>
+				<div className={styles.stocksSection}>
+					<div >
+						<FormControl className={styles.companyName}>
+							<Select
+								value={stockName}
+								onChange={handleChange}
+								MenuProps={{
+									PaperProps: {
+										style: {
+											maxHeight: 300,
+										},
 									},
-								},
-							}}
-						>
-							{stockBasePriceList.map((stockItem) => (
-								<MenuItem key={stockItem.stock_name} value={stockItem.stock_name}>
-									<div className={styles.stockData}>
+								}}
+							>
+								{stockBasePriceList.map((stockItem) => (
+									<MenuItem key={stockItem.stock_name} value={stockItem.stock_name}>
+										<div className={styles.stockData}>
 
-										<div className={styles.stockSymbol}>
-											{stockItem.stock_symbol}
+											<div className={styles.stockSymbol}>
+												{stockItem.stock_symbol}
+											</div>
+											<div className={styles.stockName}>
+												{stockItem.stock_name}
+											</div>
 										</div>
-										<div className={styles.stockName}>
-											{stockItem.stock_name}
-										</div>
-									</div>
-								</MenuItem>
-							))}
-						</Select>
-					</FormControl>
-				</div>
-				<div className={styles.priceSection}>
-					<div>
-						Price
+									</MenuItem>
+								))}
+							</Select>
+						</FormControl>
 					</div>
-					<div className={styles.price}>
-						<div className={styles.priceValue}>
-							{basePrice}
-						</div>
+					<div className={styles.priceSection}>
 						<div>
-							<img src="up.png" alt="up" />
-							{/* <img src="crossed.png" alt="up" /> */}
-							{/* &#8593;
-						&#8595; */}
+							Price
+						</div>
+						<div className={styles.price}>
+							<div className={styles.priceValue} style={{ color: percentageChange >= 0 ? '#2f9e44' : '#e03131' }}>
+								{currentValue}
+							</div>
+							<img src={percentageChange >= 0 ? UP : DOWN} alt="change" className={styles.upDownImage} />
+						</div>
+
+						<div className={styles.percentage}>
+							{percentageChange}%
 						</div>
 					</div>
-					<div>
-						3.00%
-					</div>
+					<input
+						type="number"
+						placeholder="Enter QTY"
+						className={styles.quantitySection}
+						value={quantity ?? ''}
+						onChange={(e) => setQuantity(parseInt(e.target.value))}
+					/>
+					<button className={styles.buy} onClick={handleBuy}>
+						Buy
+					</button>
+					<button className={styles.sell} onClick={handleSell}>
+						Sell
+					</button>
 				</div>
-				<input type="text" placeholder='Enter QTY' className={styles.quantitySection} />
-				<div className={styles.buy}>
-					Buy
-				</div>
-				<div className={styles.sell}>
-					Sell
+				<div className={styles.graph}>
+					<ChartComponent
+						setCurrentValue={setCurrentValue}
+						setPercentageChange={setPercentageChange}
+					/>
 				</div>
 			</div>
-			<div className= {styles.graph}>
+			<div className={styles.historySection}>
+				<div className={styles.history}>
 
-				<ChartComponent />
+					<History />
+				</div>
+				<div className={styles.logs}>
+					hiiii
+				</div>
 			</div>
 		</div>
 
 	);
 }
+
+

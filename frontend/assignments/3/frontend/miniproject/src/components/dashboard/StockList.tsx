@@ -6,7 +6,7 @@ import { createUseStyles } from "react-jss";
 import { Box, Pagination, Stack } from "@mui/material";
 import { IStockBasePrice } from "../../redux/StockBasePriceSlice";
 import { addToWatchList, removeFromWatchList } from "../../redux/WatchListSlice";
-import CircularIndeterminate from "../Loader";
+import {CircularIndeterminate} from "../Loader";
 import { Link } from "react-router-dom";
 
 export function StockList() {

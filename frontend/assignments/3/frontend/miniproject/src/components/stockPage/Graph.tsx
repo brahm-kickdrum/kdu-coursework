@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import { Bar } from "react-chartjs-2";
 import { Chart, BarController, BarElement, LinearScale, Title, CategoryScale } from "chart.js";
@@ -5,48 +6,85 @@ import { Chart, BarController, BarElement, LinearScale, Title, CategoryScale } f
 Chart.register(BarController, BarElement, LinearScale, Title, CategoryScale);
 
 function generateRandomValue() {
-  return Math.floor(Math.random() * (5000 - 100 + 1)) + 100;
+    return Math.floor(Math.random() * (5000 - 100 + 1)) + 100;
 }
 
-const Graph = () => {
-  const [data, setData] = useState<number[]>([]);
-  const chartRef = useRef<Chart<"bar", number[], string> | null>(null);
+interface ChartComponentProps {
+    setCurrentValue: React.Dispatch<React.SetStateAction<number>>;
+    setPercentageChange: React.Dispatch<React.SetStateAction<number>>;
+}
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const newValue = generateRandomValue();
-      setData((prevData) => [...prevData, newValue]);
-    }, 5000);
+const Graph: React.FC<ChartComponentProps> = ({setCurrentValue, setPercentageChange }) => {
+    const [data, setData] = useState<number[]>([]);
+    const [labels, setLabels] = useState<string[]>(Array.from({ length: 50 }, (_, i) => `${i * 5}`));
+    const [color, setColor] = useState<string[]>([]);
+    const chartRef = useRef<Chart<"bar", number[], string> | null>(null);
+    const counterRef = useRef<number>(51);
 
-    return () => clearInterval(interval);
-  }, []);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const newValue = generateRandomValue();
+            if (data.length < 50) {
+                const prevValue = data[data.length - 1];
+                setData((prevData) => [...prevData, newValue]);
+                const diff = prevValue ? ((newValue - prevValue) / prevValue) * 100 : 0;
+                setColor((prevColor) => [...prevColor, prevValue && newValue >= prevValue ? '#b2f2bb' :'#ffc9c9'  ]);
+                setCurrentValue(newValue);
+                setPercentageChange(parseFloat(diff.toFixed(2)));
+            } else {
+                const newLabel = `${counterRef.current}`;
+                counterRef.current++;
+                setLabels((prevLabels) => [...prevLabels.slice(1), newLabel]);
+                const prevValue = data[data.length - 1];
+                const newValue = generateRandomValue();
+                const diff = prevValue ? ((newValue - prevValue) / prevValue) * 100 : 0;
+                setData((prevData) => [...prevData.slice(1), newValue]);
+                setColor((prevColor) => [...prevColor.slice(1), prevValue && newValue >= prevValue ?  '#b2f2bb': '#ffc9c9' ]);
+                setCurrentValue(newValue); 
+                setPercentageChange(parseFloat(diff.toFixed(2)));
+            }
+        }, 5000);
 
-  useEffect(() => {
-    if (chartRef.current) {
-      chartRef.current.data.datasets[0].data = data;
-      chartRef.current.update();
-    }
-  }, [data]);
+        return () => clearInterval(interval);
+    }, [data]);
 
-  return (
-    <div>
-      <Bar
-        ref={chartRef}
-        data={{
-          labels: data.map((_, index) => `Value ${index + 1}`),
-          datasets: [
-            {
-              label: "Random Values",
-              data: data,
-              backgroundColor: "rgba(75, 192, 192, 0.2)",
-              borderColor: "rgba(75, 192, 192, 1)",
-              borderWidth: 1,
-            },
-          ],
-        }}
-      />
-    </div>
-  );
+    useEffect(() => {
+        if (chartRef.current) {
+            chartRef.current.data.labels = labels;
+            chartRef.current.data.datasets[0].data = data;
+            chartRef.current.data.datasets[0].backgroundColor = color;
+            chartRef.current.update();
+        }
+    }, [data, labels, color]);
+
+    const chartConfig = {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: "Random Values",
+                    data: data,
+                    backgroundColor: color,
+                    borderWidth: 1,
+                    barThickness: 25,
+                },
+            ],
+        },
+        indexAxis: "x",
+        barThickness: 'flex',
+        categoryPercentage: 0.5,
+        barPercentage: 0.2,
+    };
+
+    return (
+        <div>
+            <Bar
+                ref={chartRef}
+                data={chartConfig.data}
+            />
+        </div>
+    );
 };
 
 export default Graph;

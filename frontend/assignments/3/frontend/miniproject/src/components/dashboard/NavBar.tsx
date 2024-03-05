@@ -16,16 +16,11 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
 interface Props {
-    /**
-     * Injected by the documentation to work in an iframe.
-     * You won't need it on your project.
-     */
     window?: () => Window;
 }
 
 const drawerWidth = 240;
 const navItems = ['Summarizer', 'My PortFolio'];
-
 export function DrawerAppBar(props: Props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -44,7 +39,9 @@ export function DrawerAppBar(props: Props) {
                 {navItems.map((item) => (
                     <ListItem key={item} disablePadding>
                         <ListItemButton sx={{ textAlign: 'center' }}>
-                            <ListItemText primary={item} />
+                            <Link to={`/${item}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                <ListItemText primary={item} />
+                            </Link>
                         </ListItemButton>
                     </ListItem>
                 ))}
@@ -84,9 +81,11 @@ export function DrawerAppBar(props: Props) {
                     </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         {navItems.map((item) => (
-                            <Button key={item} sx={{ color: '#fff', fontSize: "1.2rem" }}>
-                                {item}
-                            </Button>
+                            <Link key={item} to={`/${item}`} style={{ textDecoration: 'none' }}>
+                                <Button sx={{ color: '#fff', fontSize: "1.2rem" }}>
+                                    {item}
+                                </Button>
+                            </Link>
                         ))}
                     </Box>
                 </Toolbar>
