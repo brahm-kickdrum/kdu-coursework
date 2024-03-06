@@ -49,6 +49,13 @@ export function WatchList() {
         },
         tickImage: {
             width: "2rem"
+        },
+        "@media (max-width: 700px)": {
+            stockListSection: {
+                margin: "1.5rem 5% 0",
+                border: "solid 0.25rem #5B6065",
+                borderRadius: "2rem",
+            },
         }
 
     });

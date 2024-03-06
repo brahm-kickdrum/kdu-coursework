@@ -285,7 +285,6 @@ export function CompanyStock() {
 					<History />
 				</div>
 				<div className={styles.logs}>
-					hiiii
 				</div>
 			</div>
 		</div>

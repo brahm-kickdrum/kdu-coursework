@@ -22,7 +22,11 @@ export const TransactionList: React.FC = () => {
             display: "flex",
             borderBottom: "1px solid black",
             width: "100%",
-            padding: "1.25rem 0"
+            padding: "1.25rem 0",
+            opacity: 1,
+            "&.unchecked": {
+                opacity: 0.5, 
+            }
         },
         transaction: {
             display: "flex",
@@ -72,6 +76,64 @@ export const TransactionList: React.FC = () => {
             color: "#919192",
             padding: "1.5rem 0 1rem"
         },
+        "@media (mini-width: 600px && max-width: 900px)": {
+            transaction: {
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+                flexDirection: "column"
+            },
+            transactionItemName: {
+                width: "100%",
+                backgroundColor: 'yellow'
+            },
+            transactionItemDetails: {
+                display: "flex",
+                width: "100%",
+                alignItems: "center"
+            },
+            transactionItemPrice: {
+                width: "80%",
+                textAlign: "left"
+            },
+            transactionItemTime: {
+                width: "20%",
+            },
+        },
+        "@media ( max-width: 600px)": {
+            transactionSection: {
+                padding: "2rem 5vw",
+                display: "flex",
+                justifyContent: "space-between",
+                flexDirection: "column",
+                alignItems: "center"
+            },
+            transactionListSection: {
+                fontSize: "1.3rem",
+                width: "85vw",
+            },
+            transaction: {
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+                flexDirection: "column"
+            },
+            transactionItemName: {
+                width: "100%",
+                backgroundColor: 'yellow'
+            },
+            transactionItemDetails: {
+                display: "flex",
+                width: "100%",
+                alignItems: "center",
+                justifyContent: "space-between"
+            },
+            transactionItemPrice: {
+                width: "80%",
+                textAlign: "left"
+            },
+
+        }
     });
     const styles = style();
 
@@ -84,10 +146,13 @@ export const TransactionList: React.FC = () => {
     const status = useSelector((state: RootState) => state.transactionList.status);
     const error = useSelector((state: RootState) => state.transactionList.error);
 
-
     const [groupedTransactionList, setGroupedTransactionList] = useState<{ [date: string]: ITransaction[] }>({});
     const [filteredTransactionList, setFilteredTransactionList] = useState<{ [date: string]: ITransaction[] }>({});
 
+    const [showPassed, setShowPassed] = useState(true);
+    const [showFailed, setShowFailed] = useState(true);
+
+    const [checkedStockNames, setCheckedStockNames] = useState<string[]>([]);
 
     useEffect(() => {
         const sortedTransactions = [...transactionList].sort((a, b) => {
@@ -109,21 +174,22 @@ export const TransactionList: React.FC = () => {
 
     useEffect(() => {
         const filteredTransactions: { [date: string]: ITransaction[] } = {};
-    
+
         Object.keys(groupedTransactionList).forEach(date => {
             const filteredList = groupedTransactionList[date].filter(transaction =>
                 transaction.stock_name.toLowerCase().includes(searchInput.toLowerCase()) &&
                 (startDate === null || new Date(transaction.timestamp) >= startDate) &&
-                (endDate === null || new Date(transaction.timestamp) <= endDate)
+                (endDate === null || new Date(transaction.timestamp) <= endDate) &&
+                ((showPassed && transaction.status === 'Passed') || (showFailed && transaction.status === 'Failed'))
             );
             if (filteredList.length > 0) {
                 filteredTransactions[date] = filteredList;
             }
         });
-    
+
         setFilteredTransactionList(filteredTransactions);
-    }, [searchInput, startDate, endDate, groupedTransactionList]);
-    
+    }, [searchInput, startDate, endDate, groupedTransactionList, showPassed, showFailed]);
+
 
 
     if (status === TransactionStatus.Pending) {
@@ -140,7 +206,8 @@ export const TransactionList: React.FC = () => {
 
     return (
         <div className={styles.transactionSection}>
-            <Filter searchInput={searchInput} setSearchInput={setSearchInput} startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} />
+            <Filter searchInput={searchInput} setSearchInput={setSearchInput} startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}
+            showPassed={showPassed} setShowPassed={setShowPassed} showFailed={showFailed} setShowFailed={setShowFailed} checkedStockNames={checkedStockNames} setCheckedStockNames={setCheckedStockNames} />
 
             <div className={styles.transactionListSection}>
                 {Object.keys(filteredTransactionList).map(date => (
@@ -148,7 +215,8 @@ export const TransactionList: React.FC = () => {
                         <div className={styles.dateHeader}>{date}</div>
                         <ul>
                             {filteredTransactionList[date]?.map((transaction, index) => (
-                                <li key={index} className={styles.transactionItem} >
+                                <li key={index} className={`${styles.transactionItem} ${checkedStockNames.length === 0 || checkedStockNames.includes(transaction.stock_name) ? '' : 'unchecked'}`}>
+                                
                                     <div className={styles.transaction}>
                                         <div className={styles.transactionItemName}>
                                             <div className={styles.stockName}>{transaction.stock_name}</div>
@@ -159,8 +227,8 @@ export const TransactionList: React.FC = () => {
                                             <div className={styles.transactionItemTime}>
                                                 {transaction.timestamp.split('T')[1].split(':')[0] + ':' + transaction.timestamp.split('T')[1].split(':')[1]}
                                             </div>
+                                            <div className={`${styles.dot} ${transaction.status === "Passed" ? styles.greenDot : styles.redDot}`} />
                                         </div>
-                                        <div className={`${styles.dot} ${transaction.status === "Passed" ? styles.greenDot : styles.redDot}`} />
                                     </div>
                                 </li>
                             ))}

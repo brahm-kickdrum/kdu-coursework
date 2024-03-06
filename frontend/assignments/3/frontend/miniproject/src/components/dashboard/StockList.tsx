@@ -53,14 +53,19 @@ export function StockList() {
         paginationContainer: {
             display: 'flex',
             justifyContent: 'center',
-            // marginTop: '2rem',
             padding: "1.5rem",
             alignItems: "center"
         },
         tickImage: {
             width: "2rem"
+        },
+        "@media (max-width: 700px)": {
+            stockListSection: {
+                margin: "1.5rem 5% 0",
+                border: "solid 0.25rem #5B6065",
+                borderRadius: "2rem",
+            },
         }
-
     });
 
     const reduxDispatch: AppDispatch = useDispatch();
@@ -72,8 +77,6 @@ export function StockList() {
     useEffect(() => {
         reduxDispatch(getStockBasePrice());
     }, []);
-
-    // Pagination state
 
     const [page, setPage] = useState(1);
     const itemsPerPage = 7;
@@ -112,7 +115,6 @@ export function StockList() {
                 (<CircularIndeterminate />) :
                 <div className={styles.stockListSection}>
                     <ul>
-                        {/* <li className={styles.listItem, styles.listItemHearder} > */}
                         <li className={[styles.listItem, styles.listItemHearder].join(' ')}>
                             <div>
                                 Company
@@ -162,7 +164,6 @@ export function StockList() {
                                 page={page}
                                 onChange={handleChangePage}
                                 size="large" />
-                            {/* <Pagination count={totalPages} defaultPage={6} siblingCount={0} color="primary"/> */}
                         </Stack>
                     </div>
                 </div>
