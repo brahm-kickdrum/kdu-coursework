@@ -1,0 +1,9 @@
+.main-page {
+  padding: 4rem 6rem;
+  background-color: #FFEC99;
+  height: 100vh;
+}
+.main-page .lists {
+  display: flex;
+  justify-content: space-between;
+}/*# sourceMappingURL=Mainpage.css.map */
