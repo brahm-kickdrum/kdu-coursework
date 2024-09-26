@@ -1,0 +1,158 @@
+* {
+  padding: 0;
+  border: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.header {
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+  background-color: #1871c2;
+  color: aliceblue;
+}
+
+.dashboard {
+  display: flex;
+}
+.dashboard .stock-details {
+  width: 75%;
+  margin: 60px 50px 60px 100px;
+}
+.dashboard .stock-details .buy-sell {
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+}
+.dashboard .stock-details .buy-sell .company {
+  display: flex;
+  align-items: center;
+  border: 1px black solid;
+  justify-content: space-around;
+  padding: 0 30px;
+}
+.dashboard .stock-details .buy-sell .company .company-logo img {
+  width: 50px;
+}
+.dashboard .stock-details .buy-sell .company .company-name {
+  font-size: 25px;
+  padding: 20px;
+}
+.dashboard .stock-details .buy-sell .price {
+  display: flex;
+  align-items: center;
+  border: 1px black solid;
+  justify-content: space-around;
+  font-size: 25px;
+  padding: 20px;
+}
+.dashboard .stock-details .buy-sell .price .price-text {
+  padding: 15px;
+}
+.dashboard .stock-details .buy-sell .price .price-value {
+  border: none;
+  padding: 15px 5px 15px 10px;
+}
+.dashboard .stock-details .buy-sell .price .percent {
+  font-size: 15px;
+  padding: 15px;
+}
+.dashboard .stock-details .buy-sell .price .arrow .arrow-image {
+  width: 30px;
+}
+.dashboard .stock-details .buy-sell .quantity {
+  display: flex;
+  align-items: center;
+  border: 1px black solid;
+  padding: 20px;
+}
+.dashboard .stock-details .buy-sell .quantity .enter-quantity {
+  font-size: 25px;
+  padding: 20px;
+  outline: none;
+  color: black;
+  width: 200px;
+}
+.dashboard .stock-details .buy-sell .buy {
+  color: aliceblue;
+  background-color: #2F9e44;
+  font-size: 25px;
+  width: 100px;
+}
+.dashboard .stock-details .buy-sell .sell {
+  color: aliceblue;
+  background-color: #e03131;
+  font-size: 25px;
+  width: 100px;
+}
+.dashboard .stock-details .graph {
+  display: flex;
+  align-items: end;
+  margin-top: 50px;
+  border: 1px black solid;
+  height: 500px;
+}
+.dashboard .stock-details .graph .bar {
+  width: 20px;
+  height: 300px;
+  border: 1px solid #2F9e44;
+  background-color: #b2f2bb;
+}
+.dashboard .history {
+  width: 25%;
+  margin: 60px 100px 60px 50px;
+  border: 1px black solid;
+  height: 630px;
+}
+.dashboard .history .history-text {
+  font-size: 25px;
+  padding: 20px 20px 0 20px;
+}
+.dashboard .history .history-list {
+  overflow-y: auto;
+  height: 530px;
+}
+.dashboard .history .history-list .history-item {
+  border: 1px black solid;
+  border-radius: 20px;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+  margin: 20px;
+}
+.dashboard .history .history-list .history-item .history-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100px;
+}
+.dashboard .history .history-list .history-item .history-details .stock-quantity-text {
+  display: flex;
+  align-items: center;
+}
+.dashboard .history .history-list .history-item .history-details .stock-quantity-text .stock-quatity {
+  font-size: 20px;
+  padding: 5px;
+}
+.dashboard .history .history-list .history-item .history-details .stock-quantity-text .stock-text {
+  font-size: 20px;
+  padding-right: 5px;
+}
+.dashboard .history .history-list .history-item .history-details .stock-quantity-text .stock-company {
+  font-size: 20px;
+}
+.dashboard .history .history-list .history-item .history-details .date-time {
+  display: flex;
+  align-items: center;
+}
+.dashboard .history .history-list .history-item .history-details .date-time .day {
+  padding: 5px;
+}
+.dashboard .history .history-list .history-item .buy-or-sell {
+  padding: 15px;
+  font-size: 20px;
+  color: #2F9e44;
+  font-weight: 600;
+}/*# sourceMappingURL=style.css.map */
